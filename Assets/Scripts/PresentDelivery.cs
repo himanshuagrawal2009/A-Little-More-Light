@@ -3,17 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class PresentDelivery : MonoBehaviour
 {
-
     public int PresentsDelivered = 0; 
     bool[] HousesDelivered = new bool[6]; // Assuming 6 houses
     [SerializeField] GameObject[] Presents = new GameObject[6]; // Assuming 6 presents
     [SerializeField] AudioSource audioSource; // Reference to the AudioSource component
     [SerializeField] AudioClip PresentDeliverySFX, BackgroundMusic; // Reference to the delivery sound and background music clips
+    [SerializeField] private GameObject EndGameScreen; // Reference to the end game screen sprite
     void Start()
     {
         audioSource.clip = BackgroundMusic; // Set the background music clip
         audioSource.loop = true; // Make the background music loop
-        audioSource.Play(); // Play the background music
+        audioSource.Play(); // Play the background music       
     }
 
     
@@ -88,8 +88,7 @@ public class PresentDelivery : MonoBehaviour
 
         if (PresentsDelivered == 6)
         {
-            Debug.Log("All presents delivered!");
+            EndGameScreen.SetActive(true); // Show the end game screen      
         }
     }
-
 }

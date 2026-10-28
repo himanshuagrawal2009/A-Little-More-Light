@@ -6,13 +6,15 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
     float speed = 5.0f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Animator animator; // Reference to the Animator component
+
+
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         Movement();
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         transform.Translate(horizontalInput * Time.deltaTime * speed, 0, verticalInput * Time.deltaTime * speed);
+        animator.speed = (horizontalInput != 0 || verticalInput != 0) ? 1f : 0f;
     }
 
 }
